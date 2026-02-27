@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design tokens from Belong design system */
+:root {
+  /* ─── Colors ───────────────────────────────────────────────────────────── */
+  /* Surfaces */
+  --surface-1: #f1f1f1;
+  --surface-3: #c7c7c7;
+  --surface-4: #949494;
+  --surface-1-inverted: #121212; /* Figma: Surface/Surface-1 Inverted */
+
+  /* Text */
+  --text-primary: #121212;
+  --text-secondary: #4f4d4c;
+  --text-tertiary: #706d6c;
+  --text-primary-inverted: #f1f1f1; /* Figma: Text/Text-Primary Inverted */
+
+  /* Accent */
+  --accent-primary: #ac50e1;
+
+  /* Border */
+  --border: #c7c7c7;
+
+  /* Pills / UI */
+  --pill-surface: #defd61;
+  --pill-text: #defd61;
+
+  /* Toggle */
+  --toggle-track-bg: #121212; /* Light theme: dark track */
+  --toggle-knob-bg: #f1f1f1;  /* Light theme: light knob */
+
+  /* ─── Typography (Text) ─────────────────────────────────────────────────── */
+  /* Font families */
+  --font-outfit: "Outfit", sans-serif;
+  --font-inter: "Inter", sans-serif;
+
+  /* Font sizes */
+  --text-13: 13px;
+  --text-14: 14px;
+  --text-16: 16px;
+  --text-23: 23px;
+  --text-27: 27px;
+  --text-40: 40px;
+
+  /* Line heights */
+  --leading-tight: 0.96;
+  --leading-snug: 1.15;
+  --leading-normal: 1.45;
+  --leading-relaxed: 1.6;
+
+  /* Letter spacing */
+  --tracking-tight: -0.276px;
+  --tracking-normal: 0;
+  --tracking-wide: 0.32px;
+  --tracking-wider: 0.8px;
+
+  /* Font weights */
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+
+  /* ─── Spacing ───────────────────────────────────────────────────────────── */
+  --spacing-2: 2px;
+  --spacing-4: 4px;
+  --spacing-8: 8px;
+  --spacing-16: 16px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  --spacing-40: 40px;
+  --spacing-48: 48px;
+  --spacing-64: 64px;
+
+  /* ─── Radius ───────────────────────────────────────────────────────────── */
+  --radius-s: 8px;
+  --radius-m: 16px;
+  --radius-xl: 24px;
+  --radius-round: 999px;
+}
+
+:root[data-theme="dark"] {
+  /* Surfaces – exact dark values from Figma */
+  --surface-1: #121212;   /* Surface/Surface-1 */
+  --surface-3: #656262;   /* Surface/Surface-3 */
+  --surface-4: #c9c2c1;   /* Surface/Surface-4 */
+
+  /* Text – exact dark values from Figma */
+  --text-primary: #f1f1f1;      /* Text/Text-Primary */
+  --text-secondary: #c9c2c1;    /* Text/Text-Secondary */
+  --text-tertiary: #706d6c;     /* Text/Text-Tertiary */
+
+  /* Accent / border / pill – exact dark values from Figma */
+  --accent-primary: #ac50e1;    /* Accent/Primary/100 */
+  --border: #656262;            /* Border */
+  --pill-text: #121212;         /* Pill-Text */
+
+  /* Toggle: same track/knob colors in dark mode, light on dark bg */
+  --toggle-track-bg: #f1f1f1;
+  --toggle-knob-bg: #f1f1f1;
+}
+
+/* Base typography */
+body {
+  @apply antialiased;
+  font-feature-settings: normal;
+}
