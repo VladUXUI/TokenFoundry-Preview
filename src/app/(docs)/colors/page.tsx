@@ -43,7 +43,7 @@ function Section({
 }) {
   return (
     <section className="flex flex-col gap-6">
-      <div className="flex max-w-[632px] flex-col gap-2">
+      <div className="flex w-full flex-col gap-2">
         <h3 className="font-outfit text-[27px] font-medium leading-[1.15] tracking-[0.216px] text-text-primary">
           {title}
         </h3>
@@ -70,7 +70,7 @@ export default function ColorsPage() {
 
   return (
     <>
-      <div className="flex max-w-[632px] flex-col gap-4">
+      <div className="flex w-full flex-col gap-4">
         <div className="flex flex-col gap-1">
           <p className="font-inter text-[13px] font-medium leading-[1.6] text-text-secondary">
             FOUNDATIONAL
@@ -127,7 +127,7 @@ export default function ColorsPage() {
             )}
           </button>
 
-          <div className="absolute bottom-0 left-0 z-0 h-px w-[762px] bg-surface-3" />
+          <div className="absolute bottom-0 left-0 right-0 z-0 h-px bg-surface-3" />
         </div>
 
         {activeTab === "ui" && (
@@ -157,7 +157,7 @@ export default function ColorsPage() {
 
         {activeTab === "primitives" && (
           <section className="flex flex-col gap-6">
-            <div className="flex max-w-[632px] flex-col gap-2">
+            <div className="flex w-full flex-col gap-2">
               <h3 className="font-outfit text-[27px] font-medium leading-[1.15] tracking-[0.216px] text-text-primary">
                 Primitives
               </h3>

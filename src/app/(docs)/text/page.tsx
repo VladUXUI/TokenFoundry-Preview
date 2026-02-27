@@ -15,12 +15,12 @@ function TypeSample({
   exampleText?: string;
 }) {
   return (
-    <div className="flex w-full flex-col gap-2 rounded-[var(--radius-m)] border border-border bg-surface-1 p-4 shadow-[0px_2px_4px_0px_rgba(0,0,0,0.06)]">
+    <div className="flex w-full min-w-0 flex-col gap-2 rounded-[var(--radius-m)] border border-border bg-surface-1 p-4 shadow-[0px_2px_4px_0px_rgba(0,0,0,0.06)] overflow-hidden">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
         <p className="font-inter text-[14px] font-semibold leading-[1.45] text-text-primary">
           {name}
         </p>
-        <p className="font-inter text-[13px] font-medium leading-[1.6] text-text-tertiary">
+        <p className="font-inter text-[13px] font-medium leading-[1.6] text-text-tertiary shrink-0">
           {variable}
         </p>
       </div>
@@ -28,7 +28,7 @@ function TypeSample({
         {usage}
       </p>
       <p
-        className="text-text-primary"
+        className="min-w-0 overflow-hidden break-words text-text-primary"
         style={{ fontSize: `var(${variable})` }}
       >
         {exampleText}
@@ -47,12 +47,12 @@ function FontFamilyCard({
   usage: string;
 }) {
   return (
-    <div className="flex w-full max-w-[400px] flex-col gap-2 rounded-[var(--radius-m)] border border-border bg-surface-1 p-4 shadow-[0px_2px_4px_0px_rgba(0,0,0,0.06)]">
+    <div className="flex w-full min-w-0 flex-col gap-2 rounded-[var(--radius-m)] border border-border bg-surface-1 p-4 shadow-[0px_2px_4px_0px_rgba(0,0,0,0.06)] overflow-hidden">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
         <p className="font-inter text-[14px] font-semibold leading-[1.45] text-text-primary">
           {name}
         </p>
-        <p className="font-inter text-[13px] font-medium leading-[1.6] text-text-tertiary">
+        <p className="font-inter text-[13px] font-medium leading-[1.6] text-text-tertiary shrink-0">
           {variable}
         </p>
       </div>
@@ -60,10 +60,16 @@ function FontFamilyCard({
         {usage}
       </p>
       <p
-        className="text-[24px] text-text-primary"
+        className="min-w-0 overflow-hidden text-[24px] text-text-primary break-words"
         style={{ fontFamily: `var(${variable})` }}
       >
-        The quick brown fox jumps over the lazy dog.
+        A B C D E F G H I J K L M N O P Q R S T U V W X Y Z.
+        <br />
+        a b c d e f g h i j k l m n o p q r s t u v w x y z.
+        <br />
+        0 1 2 3 4 5 6 7 8 9.
+        <br />
+        ! @ # $ % ^ & * ( ) _ + - = [ ] { } | \ : ; ' " < > , . ? /</>
       </p>
     </div>
   );
@@ -76,7 +82,7 @@ export default function TextPage() {
 
   return (
     <>
-      <div className="flex max-w-[632px] flex-col gap-4">
+      <div className="flex w-full flex-col gap-4">
         <div className="flex flex-col gap-1">
           <p className="font-inter text-[13px] font-medium leading-[1.6] text-text-secondary">
             FOUNDATIONAL
@@ -91,8 +97,8 @@ export default function TextPage() {
         </p>
       </div>
 
-      <div className="flex flex-col gap-16">
-        <div className="relative isolate -mb-px flex items-start gap-6">
+      <div className="flex w-full min-w-0 flex-col gap-16">
+        <div className="relative isolate -mb-px flex w-full items-start gap-6">
           <button
             type="button"
             onClick={() => setActiveTab("families")}
@@ -131,12 +137,12 @@ export default function TextPage() {
             )}
           </button>
 
-          <div className="absolute bottom-0 left-0 z-0 h-px w-[762px] bg-surface-3" />
+          <div className="absolute bottom-0 left-0 right-0 z-0 h-px bg-surface-3" />
         </div>
 
         {activeTab === "families" && (
-          <section className="flex flex-col gap-6">
-            <div className="flex max-w-[632px] flex-col gap-2">
+          <section className="flex w-full min-w-0 flex-col gap-6">
+            <div className="flex w-full flex-col gap-2">
               <h3 className="font-outfit text-[27px] font-medium leading-[1.15] tracking-[0.216px] text-text-primary">
                 Font families
               </h3>
@@ -144,7 +150,7 @@ export default function TextPage() {
                 Defined in globals.css as --font-outfit and --font-inter.
               </p>
             </div>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex w-full min-w-0 flex-col gap-4">
               {fontFamilyTokens.map((t) => (
                 <FontFamilyCard
                   key={t.variable}
@@ -158,8 +164,8 @@ export default function TextPage() {
         )}
 
         {activeTab === "sizes" && (
-          <section className="flex flex-col gap-6">
-            <div className="flex max-w-[632px] flex-col gap-2">
+          <section className="flex w-full min-w-0 flex-col gap-6">
+            <div className="flex w-full flex-col gap-2">
               <h3 className="font-outfit text-[27px] font-medium leading-[1.15] tracking-[0.216px] text-text-primary">
                 Font sizes
               </h3>
@@ -167,7 +173,7 @@ export default function TextPage() {
                 Size scale from globals.css: --text-13 through --text-40.
               </p>
             </div>
-            <div className="flex flex-col gap-4">
+            <div className="flex w-full min-w-0 flex-col gap-4">
               {typographyTokens.map((t) => (
                 <TypeSample
                   key={t.variable}

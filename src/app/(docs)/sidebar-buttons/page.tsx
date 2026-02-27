@@ -3,7 +3,7 @@ import { SidebarButton } from "@/components/SidebarButton";
 export default function SidebarButtonsPage() {
   return (
     <>
-      <div className="flex max-w-[632px] flex-col gap-4">
+      <div className="flex w-full flex-col gap-4">
         <div className="flex flex-col gap-1">
           <p className="font-inter text-[13px] font-medium leading-[1.6] text-text-secondary">
             COMPONENTS
@@ -20,7 +20,7 @@ export default function SidebarButtonsPage() {
 
       <div className="flex flex-col gap-16">
         <section className="flex flex-col gap-6">
-          <div className="flex max-w-[632px] flex-col gap-2">
+          <div className="flex w-full flex-col gap-2">
             <h3 className="font-outfit text-[27px] font-medium leading-[1.15] tracking-[0.216px] text-text-primary">
               States
             </h3>

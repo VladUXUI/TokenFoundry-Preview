@@ -19,13 +19,13 @@ export default function DocsLayout({
   const { theme, setTheme } = useTheme();
 
   return (
-    <div className="flex h-screen w-full items-stretch bg-surface-1">
-      <aside className="flex h-full w-[268px] shrink-0 flex-col justify-between border-r border-border pb-6">
+    <div className="flex min-h-screen w-full items-stretch bg-surface-1">
+      <aside className="sticky top-0 flex h-screen w-[268px] shrink-0 flex-col justify-between border-r border-border pb-6 self-start">
         <div className="flex flex-col gap-8">
           <div className="flex flex-col">
             <div className="flex flex-col gap-1.5 px-8 py-8">
               <h1 className="font-outfit text-[23px] font-bold leading-[1.15] tracking-[-0.276px] text-text-primary">
-                Project name
+                TokenFoundry
               </h1>
               <p className="font-inter text-[13px] font-medium leading-[1.6] text-text-secondary">
                 Design System documentation
@@ -75,8 +75,10 @@ export default function DocsLayout({
             <Toggle mode={theme} onChange={setTheme} />
           </div>
         </header>
-        <div className="flex flex-1 justify-between px-[244px] py-16">
-          <div className="flex min-w-0 flex-1 flex-col gap-12">{children}</div>
+        <div className="flex flex-1 flex-col px-6 py-16 sm:px-10">
+          <div className="mx-auto w-full max-w-[762px] min-w-0 flex-1 flex flex-col gap-12">
+            {children}
+          </div>
         </div>
       </main>
     </div>
