@@ -20,6 +20,14 @@ export const colorTokens = {
     { name: "Text tertiary", variable: "--text-tertiary" },
   ],
   border: [{ name: "Border", variable: "--border" }],
+  /** Base colors that UI tokens reference. Add more in globals.css and here as needed. */
+  primitives: [
+    { name: "Brand", variable: "--accent-primary" },
+    { name: "Neutral light", variable: "--surface-1" },
+    { name: "Neutral dark", variable: "--text-primary" },
+    { name: "Neutral mid", variable: "--surface-3" },
+    { name: "Pill / highlight", variable: "--pill-surface" },
+  ],
 } as const;
 
 export const typographyTokens = [

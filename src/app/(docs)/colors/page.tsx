@@ -1,20 +1,41 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { colorTokens } from "@/data/design-tokens";
+import { useTheme } from "@/components/ThemeProvider";
+
+function rgbToHex(rgb: string): string | null {
+  const m = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+  if (!m) return null;
+  const hex = (x: number) => ("0" + Math.round(x).toString(16)).slice(-2);
+  return "#" + hex(Number(m[1])) + hex(Number(m[2])) + hex(Number(m[3]));
+}
 
 function ColorCard({
   variable,
   name,
   showBorder,
+  showHex,
 }: {
   variable: string;
   name: string;
   showBorder?: boolean;
+  showHex?: boolean;
 }) {
+  const swatchRef = useRef<HTMLDivElement>(null);
+  const [hex, setHex] = useState<string | null>(null);
+  const { theme } = useTheme();
+
+  useEffect(() => {
+    if (!showHex || !swatchRef.current) return;
+    const computed = getComputedStyle(swatchRef.current).backgroundColor;
+    setHex(rgbToHex(computed) ?? computed);
+  }, [showHex, variable, theme]);
+
   return (
     <div className="flex w-[236px] flex-col overflow-hidden rounded-[var(--radius-m)] bg-surface-1 shadow-[0px_6px_10px_0px_rgba(0,0,0,0.1),0px_2px_3px_0px_rgba(0,0,0,0.1)]">
       <div
+        ref={swatchRef}
         className={`h-[55px] rounded-t-[var(--radius-m)] ${showBorder ? "border border-border" : ""}`}
         style={{ backgroundColor: `var(${variable})` }}
       />
@@ -25,6 +46,11 @@ function ColorCard({
         <p className="font-inter text-[13px] font-medium leading-[1.6] text-text-tertiary">
           {variable}
         </p>
+        {showHex && hex && (
+          <p className="font-inter text-[13px] font-medium leading-[1.6] text-text-tertiary">
+            {hex}
+          </p>
+        )}
       </div>
     </div>
   );
@@ -35,11 +61,13 @@ function Section({
   description,
   tokens,
   showBorder,
+  showHex,
 }: {
   title: string;
   description: string;
   tokens: readonly { name: string; variable: string }[];
   showBorder?: boolean;
+  showHex?: boolean;
 }) {
   return (
     <section className="flex flex-col gap-6">
@@ -58,6 +86,7 @@ function Section({
             variable={t.variable}
             name={t.name}
             showBorder={showBorder}
+            showHex={showHex}
           />
         ))}
       </div>
@@ -156,18 +185,13 @@ export default function ColorsPage() {
         )}
 
         {activeTab === "primitives" && (
-          <section className="flex flex-col gap-6">
-            <div className="flex w-full flex-col gap-2">
-              <h3 className="font-outfit text-[27px] font-medium leading-[1.15] tracking-[0.216px] text-text-primary">
-                Primitives
-              </h3>
-              <p className="font-inter text-base font-normal leading-[1.45] text-text-secondary">
-                Underlying primitive color tokens (e.g. brand, neutrals) that
-                UI colors are built from. Connect these once primitives are
-                defined in your token set.
-              </p>
-            </div>
-          </section>
+          <Section
+            title="Primitives"
+            description="Underlying primitive color tokens (e.g. brand, neutrals) that UI colors are built from. Add more in globals.css and src/data/design-tokens.ts."
+            tokens={colorTokens.primitives}
+            showBorder={true}
+            showHex={true}
+          />
         )}
       </div>
     </>
