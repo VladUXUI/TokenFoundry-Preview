@@ -17,14 +17,14 @@ export function SidebarButton({
       ? "bg-accent-primary"
       : state === "hover"
       ? "bg-text-secondary"
-      : "bg-transparent group-hover:bg-text-secondary";
+      : "bg-transparent group-hover:bg-text-primary";
 
   const textClasses =
     state === "active"
-      ? "text-accent-primary"
+      ? "text-text-primary"
       : state === "hover"
-      ? "text-text-secondary"
-      : "text-text-tertiary group-hover:text-text-secondary";
+      ? "text-text-primary"
+      : "text-text-primary group-hover:text-text-primary";
 
   return (
     <div

@@ -3,20 +3,34 @@
 import { useState } from "react";
 import { radiusTokens } from "@/data/design-tokens";
 
+const radiusPixelByVariable: Record<string, string> = {
+  "--radius-s": "8px",
+  "--radius-m": "16px",
+  "--radius-xl": "24px",
+  "--radius-round": "999px",
+};
+
 function RadiusCard({ variable, name }: { variable: string; name: string }) {
+  const pixelValue = radiusPixelByVariable[variable];
+
   return (
-    <div className="flex w-[236px] flex-col gap-4 rounded-[var(--radius-m)] border border-border bg-surface-1 p-4 shadow-[0px_2px_4px_0px_rgba(0,0,0,0.06)]">
+    <div className="flex w-full items-center gap-6 rounded-[var(--radius-m)] border border-border bg-surface-1 p-4 shadow-[0px_2px_4px_0px_rgba(0,0,0,0.06)]">
       <div
-        className="h-24 w-full bg-accent-primary"
+        className="h-16 w-24 shrink-0 bg-accent-primary"
         style={{ borderRadius: `var(${variable})` }}
       />
-      <div className="flex flex-col gap-0">
-        <p className="font-inter text-[14px] font-semibold leading-[1.45] text-text-primary">
+      <div className="flex w-full items-baseline justify-between gap-4">
+        <p className="font-inter text-[14px] font-semibold leading-[1.45] text-text-primary min-w-0">
           {name}
         </p>
         <p className="font-inter text-[13px] font-medium leading-[1.6] text-text-tertiary">
           {variable}
         </p>
+        {pixelValue && (
+          <p className="font-inter text-[13px] font-medium leading-[1.6] text-text-tertiary">
+            {pixelValue}
+          </p>
+        )}
       </div>
     </div>
   );
@@ -133,7 +147,7 @@ export default function RadiusPage() {
                 the radius applied to a block.
               </p>
             </div>
-            <div className="grid w-full grid-cols-[repeat(auto-fill,236px)] gap-4">
+            <div className="flex w-full flex-col gap-4">
               {radiusTokens.map((t) => (
                 <RadiusCard
                   key={t.variable}
