@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Toggle } from "@/components/Toggle";
 
-type ToggleDocsTab = "states" | "specs";
+type ToggleDocsTab = "preview" | "states" | "specs";
 
 type SpecItem = {
   category: string;
@@ -76,7 +76,7 @@ function SpecsTable({ items }: { items: SpecItem[] }) {
 }
 
 export default function ToggleSwitchPage() {
-  const [activeTab, setActiveTab] = useState<ToggleDocsTab>("states");
+  const [activeTab, setActiveTab] = useState<ToggleDocsTab>("preview");
 
   return (
     <>
@@ -97,6 +97,25 @@ export default function ToggleSwitchPage() {
 
       <div className="flex flex-col gap-16">
         <div className="relative isolate -mb-px flex items-start gap-6">
+          <button
+            type="button"
+            onClick={() => setActiveTab("preview")}
+            className="flex flex-col gap-2"
+          >
+            <span
+              className={`font-inter text-base leading-[1.45] ${
+                activeTab === "preview"
+                  ? "font-semibold text-text-primary"
+                  : "font-normal text-text-tertiary"
+              }`}
+            >
+              Preview
+            </span>
+            {activeTab === "preview" && (
+              <div className="h-0.5 w-full bg-text-primary" />
+            )}
+          </button>
+
           <button
             type="button"
             onClick={() => setActiveTab("states")}
@@ -137,6 +156,29 @@ export default function ToggleSwitchPage() {
 
           <div className="absolute bottom-0 left-0 right-0 z-0 h-px bg-surface-3" />
         </div>
+
+        {activeTab === "preview" && (
+          <section className="flex flex-col gap-6">
+            <div className="flex w-full flex-col gap-2">
+              <h3 className="font-outfit text-[27px] font-medium leading-[1.15] tracking-[0.216px] text-text-primary">
+                Preview
+              </h3>
+              <p className="font-inter text-base font-normal leading-[1.45] text-text-secondary">
+                Live toggle preview. Click to switch between light and dark
+                modes and see the knob animation.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-4 rounded-[var(--radius-m)] border border-border bg-surface-1 p-4 shadow-[0px_2px_4px_0px_rgba(0,0,0,0.06)]">
+              <div className="flex items-center gap-4">
+                <Toggle />
+                <p className="font-inter text-[13px] font-medium leading-[1.6] text-text-tertiary">
+                  Interactive preview
+                </p>
+              </div>
+            </div>
+          </section>
+        )}
 
         {activeTab === "states" && (
           <section className="flex flex-col gap-6">

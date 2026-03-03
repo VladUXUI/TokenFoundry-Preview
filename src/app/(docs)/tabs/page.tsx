@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 type TabId = "ui" | "primitives";
-type TabsDocsTab = "states" | "specs";
+type TabsDocsTab = "preview" | "states" | "specs";
 
 const tabs: { id: TabId; label: string; description: string }[] = [
   {
@@ -97,7 +97,7 @@ function SpecsTable({ items }: { items: SpecItem[] }) {
 }
 
 export default function TabsPage() {
-  const [docsTab, setDocsTab] = useState<TabsDocsTab>("states");
+  const [docsTab, setDocsTab] = useState<TabsDocsTab>("preview");
   const [activeTab, setActiveTab] = useState<TabId>("ui");
 
   return (
@@ -120,6 +120,25 @@ export default function TabsPage() {
 
       <div className="flex flex-col gap-16">
         <div className="relative isolate -mb-px flex items-start gap-6">
+          <button
+            type="button"
+            onClick={() => setDocsTab("preview")}
+            className="flex flex-col gap-2"
+          >
+            <span
+              className={`font-inter text-base leading-[1.45] ${
+                docsTab === "preview"
+                  ? "font-semibold text-text-primary"
+                  : "font-normal text-text-tertiary"
+              }`}
+            >
+              Preview
+            </span>
+            {docsTab === "preview" && (
+              <div className="h-0.5 w-full bg-text-primary" />
+            )}
+          </button>
+
           <button
             type="button"
             onClick={() => setDocsTab("states")}
@@ -160,6 +179,48 @@ export default function TabsPage() {
 
           <div className="absolute bottom-0 left-0 right-0 z-0 h-px bg-surface-3" />
         </div>
+
+        {docsTab === "preview" && (
+          <section className="flex flex-col gap-6">
+            <div className="flex w-full flex-col gap-2">
+              <h3 className="font-outfit text-[27px] font-medium leading-[1.15] tracking-[0.216px] text-text-primary">
+                Preview
+              </h3>
+              <p className="font-inter text-base font-normal leading-[1.45] text-text-secondary">
+                Live tabs preview as used on the Colors page. Click each tab to
+                toggle the active state.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-8 rounded-[var(--radius-m)] border border-border bg-surface-1 p-4 shadow-[0px_2px_4px_0px_rgba(0,0,0,0.06)]">
+              <div className="relative isolate -mb-px flex items-start gap-6">
+                {tabs.map((tab) => (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    onClick={() => setActiveTab(tab.id)}
+                    className="flex flex-col gap-2"
+                  >
+                    <span
+                      className={`font-inter text-base leading-[1.45] ${
+                        activeTab === tab.id
+                          ? "font-semibold text-text-primary"
+                          : "font-normal text-text-tertiary"
+                      }`}
+                    >
+                      {tab.label}
+                    </span>
+                    {activeTab === tab.id && (
+                      <div className="h-0.5 w-full bg-text-primary" />
+                    )}
+                  </button>
+                ))}
+
+                <div className="absolute bottom-0 left-0 right-0 z-0 h-px bg-surface-3" />
+              </div>
+            </div>
+          </section>
+        )}
 
         {docsTab === "states" && (
           <section className="flex flex-col gap-6">
